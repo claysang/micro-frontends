@@ -30,6 +30,7 @@ function subscribeState(props) {
         (value, prev) => {
             console.log(`[onGlobalStateChange - ${props.name}]:`, value, prev);
             isLoggedIn = value.isLogin;
+            render(props);
         },
         true
     );
