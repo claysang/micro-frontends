@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import './public-path';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-
 
 function render(props) {
     const { container } = props;
