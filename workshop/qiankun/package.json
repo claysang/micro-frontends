@@ -23,6 +23,8 @@
         "install:dashboard": "cd apps/dashboard && npm i",
         "start:dashboard": "cd apps/dashboard && npm start",
         "build:dashboard": "cd apps/dashboard && npm run build",
+        "install:trends": "cd apps/trends && npm i",
+        "start:trends": "cd apps/trends && npm start",
         "format": "prettier ./**/*.{js,ts,html,json,css} --write"
     },
     "private": "true",

@@ -40,6 +40,12 @@ registerMicroApps([
         container: '#main',
         activeRule: '/dashboard',
     },
+    {
+        name: 'trends',
+        entry: '//localhost:8005/',
+        container: '#main',
+        activeRule: '/trends',
+    },
 ]);
 
 const { onGlobalStateChange, setGlobalState } = initGlobalState({
