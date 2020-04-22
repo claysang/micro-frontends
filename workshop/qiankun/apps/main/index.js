@@ -24,6 +24,9 @@ registerMicroApps([
         activeRule: '/login',
         props: {
             onLoginSuccess: () => {
+                setGlobalState({
+                    isLogin: true,
+                });
                 appNavigate('/dashboard');
             },
         },

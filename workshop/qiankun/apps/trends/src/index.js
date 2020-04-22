@@ -4,14 +4,20 @@ import './index.css';
 import './public-path';
 import * as serviceWorker from './serviceWorker';
 
-const GitHubTrends = () => <iframe className="app-trends-iframe" src="https://hitup.wondertools.top" />;
+let isLoggedIn = false;
+
+const GitHubTrends = ({ isLoggedIn }) => {
+    return isLoggedIn ?
+        <iframe className="app-trends-iframe" src="https://hitup.wondertools.top" /> :
+        <h1>You need to log in, xie xie.</h1>
+}
 
 function render(props) {
     const { container } = props;
 
     ReactDOM.render(
         <React.StrictMode>
-            <GitHubTrends />
+            <GitHubTrends isLoggedIn={isLoggedIn} />
         </React.StrictMode>,
         container
             ? container.querySelector('#root')
@@ -19,10 +25,12 @@ function render(props) {
     );
 }
 
-function storeTest(props) {
+function subscribeState(props) {
     props.onGlobalStateChange(
-        (value, prev) =>
-            console.log(`[onGlobalStateChange - ${props.name}]:`, value, prev),
+        (value, prev) => {
+            console.log(`[onGlobalStateChange - ${props.name}]:`, value, prev);
+            isLoggedIn = value.isLogin;
+        },
         true
     );
 }
@@ -37,7 +45,7 @@ export async function bootstrap() {
 
 export async function mount(props) {
     console.log('[react16] props from main framework', props);
-    storeTest(props);
+    subscribeState(props);
     render(props);
 }
 
