@@ -2,15 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import './public-path';
-import App from './App';
 import * as serviceWorker from './serviceWorker';
+
+const GitHubTrends = () => <iframe className="app-trends-iframe" src="https://hitup.wondertools.top" />;
 
 function render(props) {
     const { container } = props;
 
     ReactDOM.render(
         <React.StrictMode>
-            <App />
+            <GitHubTrends />
         </React.StrictMode>,
         container
             ? container.querySelector('#root')
