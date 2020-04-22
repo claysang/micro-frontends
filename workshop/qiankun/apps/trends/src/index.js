@@ -1,12 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import './public-path';
 import * as serviceWorker from './serviceWorker';
 
-let isLoggedIn = false;
+function GitHubTrends(props) {
+    const { qianKunProps } = props;
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-const GitHubTrends = ({ isLoggedIn }) => {
+    useEffect(() => {
+        qianKunProps.onGlobalStateChange(
+            (value, prev) => {
+                console.log(`[onGlobalStateChange - ${qianKunProps.name}]:`, value, prev);
+                setIsLoggedIn(value.isLogin);
+            },
+            true
+        );
+
+        return () => {
+            qianKunProps.offGlobalStateChange();
+        };
+    });
+
     return isLoggedIn ?
         <iframe className="app-trends-iframe" src="https://hitup.wondertools.top" /> :
         <h1>You need to log in, xie xie.</h1>
@@ -17,22 +32,11 @@ function render(props) {
 
     ReactDOM.render(
         <React.StrictMode>
-            <GitHubTrends isLoggedIn={isLoggedIn} />
+            <GitHubTrends qianKunProps={props} />
         </React.StrictMode>,
         container
             ? container.querySelector('#root')
             : document.querySelector('#root')
-    );
-}
-
-function subscribeState(props) {
-    props.onGlobalStateChange(
-        (value, prev) => {
-            console.log(`[onGlobalStateChange - ${props.name}]:`, value, prev);
-            isLoggedIn = value.isLogin;
-            render(props);
-        },
-        true
     );
 }
 
@@ -46,7 +50,6 @@ export async function bootstrap() {
 
 export async function mount(props) {
     console.log('[react16] props from main framework', props);
-    subscribeState(props);
     render(props);
 }
 

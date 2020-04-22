@@ -48,10 +48,13 @@ registerMicroApps([
         entry: '//localhost:8005/',
         container: '#main',
         activeRule: '/trends',
+        props: {
+            offGlobalStateChange: () => offGlobalStateChange,
+        }
     },
 ]);
 
-const { onGlobalStateChange, setGlobalState } = initGlobalState({
+const { onGlobalStateChange, setGlobalState, offGlobalStateChange } = initGlobalState({
     currentApp: 'qiankun',
 });
 
